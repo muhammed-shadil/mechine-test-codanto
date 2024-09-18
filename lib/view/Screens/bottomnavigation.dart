@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mechine_test_codanto/utils/constants.dart';
 import 'package:mechine_test_codanto/view/Screens/Admin_Home_screen.dart';
+import 'package:mechine_test_codanto/view/widgets/drawer.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -12,11 +14,11 @@ class MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 2;
 
   static final List<Widget> _pages = <Widget>[
-    const AdminHomeScreen(),
-    const AdminHomeScreen(),
-    const AdminHomeScreen(),
-    const AdminHomeScreen(),
-    const AdminHomeScreen(),
+    AdminHomeScreen(),
+    AdminHomeScreen(),
+    AdminHomeScreen(),
+    AdminHomeScreen(),
+    AdminHomeScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -25,9 +27,59 @@ class MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final heightFactor = size.height * 0.01;
+    final widthFactor = size.width * 0.01;
     return Scaffold(
+      key: _scaffoldKey, 
+      drawer: const CustomDrawer(),
+      backgroundColor: Constants.backgroundColor,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.menu,
+            size: 30,
+          ),
+          onPressed: () {
+         
+            _scaffoldKey.currentState?.openDrawer();
+          },
+        ),
+        backgroundColor: Constants.backgroundColor,
+        titleSpacing: 0,
+        title: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            color: Constants.white,
+          ),
+          padding: EdgeInsets.all(widthFactor * 3), 
+          child: const Row(
+            children: [
+              Icon(
+                Icons.person,
+                size: 35,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Welcome",
+                    style: styles.forgotpasswordstyle,
+                  ),
+                  Text(
+                    "Username",
+                    style: styles.profilestyle,
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,

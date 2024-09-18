@@ -5,11 +5,10 @@ import 'package:mechine_test_codanto/utils/constants.dart';
 class MainButton extends StatelessWidget {
   const MainButton({
     super.key,
-    // required this.buttontext,
     this.onpressed,
     this.child,
   });
-  // final String? buttontext;
+
   final Function()? onpressed;
   final Widget? child;
   @override

@@ -14,6 +14,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final heightFactor = size.height * 0.01;
+    final widthFactor = size.width * 0.01;
     return
         // BlocProvider(
         //   create: (context) => LoginBloc()..add(CheckLoginStatusEvent()),
@@ -33,28 +36,41 @@ class _SplashScreenState extends State<SplashScreen> {
         //       });
         //     },
         //     child:
+
         FlutterSplashScreen.fadeIn(
       nextScreen: const LoginScreen(),
       duration: const Duration(seconds: 3),
       backgroundColor: Colors.white,
       childWidget: Center(
         child: SizedBox(
-          width: MediaQuery.of(context).size.width * .7,
-          height: MediaQuery.of(context).size.height * 0.5,
+          width: size.width * 0.7,
+          height: size.height * 0.5,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset("assets/Logo.jpeg"),
-              const Padding(
-                padding: EdgeInsets.all(6.0),
+              Image.asset(
+                "assets/Logo.jpeg",
+                width: size.width * 0.6,
+                height: size.height * 0.3,
+                fit: BoxFit.contain,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: heightFactor * 1.2),
                 child: Text(
                   "Samraat",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: heightFactor * 2.5,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              const Text(
+              Text(
                 "International",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              )
+                style: TextStyle(
+                  fontSize: heightFactor * 2.5,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
         ),
